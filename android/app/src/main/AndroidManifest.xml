@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sale_record">
-   <application
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
         android:label="sale_record"
         android:icon="@mipmap/ic_launcher">
         <activity
