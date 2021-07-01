@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sale_record/model/sale.dart';
+import 'package:sale_record/sale_list_detail.dart';
 import 'package:sale_record/services/sale-service.dart';
+
+import 'add_data.dart';
 
 class ListPage extends StatelessWidget {
   final SaleService saleService = SaleService();
@@ -9,9 +12,19 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => AddData()));
+          },
+          tooltip: 'Add Sale',
+          child: Icon(Icons.add),
+        ),
         appBar: AppBar(
           title: Text("Sales"),
+          //backgroundColor: Colors.blue,
         ),
+        backgroundColor: Colors.white,
         body: FutureBuilder(
             future: saleService.getSale(),
             builder:
@@ -24,9 +37,26 @@ class ListPage extends StatelessWidget {
 
                 return ListView(
                   children: sales
-                      .map((Sale sale) => ListTile(
-                            title: Text(sale.price.toString()),
-                            subtitle: Text(sale.recordDate.toString()),
+                      .map((Sale sale) => Card(
+                            elevation: 2,
+                            child: ListTile(
+                              title: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Product Code: ${sale.productCode}"),
+                                  Text("Giro: ${sale.quantity * sale.price}"),
+                                ],
+                              ),
+
+                              //style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),
+
+                              onTap: () =>
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => SaleDetail(
+                                            sale: sale,
+                                          ))),
+                            ),
                           ))
                       .toList(),
                 );
@@ -43,7 +73,6 @@ class ListPage extends StatelessWidget {
                   height: 60,
                 );
               }
-
 
               throw UnimplementedError();
             }));

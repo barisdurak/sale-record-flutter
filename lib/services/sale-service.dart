@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:sale_record/model/sale.dart';
 
-
 class SaleService {
   //String url = 'https://localhost:5001/api/Sale';
   var url = Uri.http('192.168.0.14', '/RestApiDemo/api/Sale');
-
 
   Future<List<Sale>> getSale() async {
     try {
@@ -24,6 +22,22 @@ class SaleService {
       }
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  Future<int> postSale(Sale sale) async {
+    var body = json.encode(sale.toJson());
+
+    final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: body
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to create sale.');
     }
   }
 }

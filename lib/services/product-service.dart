@@ -5,7 +5,7 @@ import 'package:sale_record/model/product.dart';
 
 class ProductService {
   //String url = 'https://localhost:44315/api/Product';
-  var url = Uri.https('localhost:44315', '/api/Product');
+  var url = Uri.http('192.168.0.14', '/RestApiDemo/api/Product');
 
   Future<List<Product>> getProduct() async {
     try {

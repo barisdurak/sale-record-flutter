@@ -14,14 +14,13 @@ Sale _$SaleFromJson(Map<String, dynamic> json) {
     quantity: json['quantity'] as int,
     price: json['price'] as int,
     recordDate: DateTime.parse(json['recordDate'] as String),
+    productCode: json['productCode'] as String,
   );
 }
 
 Map<String, dynamic> _$SaleToJson(Sale instance) => <String, dynamic>{
-      'id': instance.id,
       'storeId': instance.storeId,
       'productId': instance.productId,
       'quantity': instance.quantity,
       'price': instance.price,
-      'recordDate': instance.recordDate.toIso8601String(),
     };

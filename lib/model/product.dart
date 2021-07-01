@@ -2,20 +2,19 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'product.g.dart';
 
-
 @JsonSerializable()
 class Product {
-  int id;
-  int pCode;
-
+  int? id;
+  int? pCode;
 
   Product({
-    required this.id,
-    required this.pCode,
-
+    this.id,
+    this.pCode,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductToJson(this);
+
 }

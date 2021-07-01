@@ -4,20 +4,22 @@ part 'sale.g.dart';
 
 @JsonSerializable()
 class Sale {
-  int id;
+  int? id;
   int storeId;
   int productId;
   int quantity;
   int price;
-  DateTime recordDate;
+  DateTime? recordDate;
+  String? productCode;
 
   Sale({
-    required this.id,
+    this.id,
     required this.storeId,
     required this.productId,
     required this.quantity,
     required this.price,
-    required this.recordDate,
+    this.recordDate,
+    this.productCode,
   });
 
   factory Sale.fromJson(Map<String, dynamic> json) => _$SaleFromJson(json);
